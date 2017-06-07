@@ -25,7 +25,7 @@ void make_file()
 //DHT22
 void read_dht_data()
 {
-    measurseq:
+measurseq:
 	uint8_t laststate    = HIGH;
 	uint8_t counter      = 0;
  	uint8_t j            = 0, i;
