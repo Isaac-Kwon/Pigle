@@ -27,7 +27,7 @@ void make_file()
 
 //DHT22
 void read_dht_data()
-{
+{   int remeasuretime = 0;
     bool measurestate = true;
     while ( measurestate )
     {
@@ -87,7 +87,7 @@ void read_dht_data()
 			c = -c;
 		}
 
- 		printf( "Humidity = %.1f %% Temperature = %.1f *C \n", h, c);
+ 		printf( "Humidity = %.1f %% Temperature = %.1f *C Remeasured $d times\n", h, c, remeasuretime);
 
                 //시간측정
                 time_t timer;
@@ -103,7 +103,7 @@ void read_dht_data()
     }
 	else 
     {
-		printf( "Data not good, Remeasure\n" );
+//		printf( "Data not good, Remeasure\n" );
         measurestate = true;
 /*                //시간측정
                 time_t timer;
@@ -115,6 +115,7 @@ void read_dht_data()
                 FILE* fp = fopen(fileD,"a");
                 fprintf(fp,"%d/%d/%d-%d:%d,,",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min);
                 fclose(fp);*/
+        remeasuretime++;
         
 
 
