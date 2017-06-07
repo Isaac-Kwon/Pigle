@@ -26,7 +26,7 @@ void make_file()
 void read_dht_data()
 {
     int measurestate = 0;
-    while (measurestate != 0)
+    while (measurestate = 0)
     {
 	uint8_t laststate    = HIGH;
 	uint8_t counter      = 0;
