@@ -25,8 +25,8 @@ void make_file()
 //DHT22
 void read_dht_data()
 {
-    int measurestate = 0;
-    while (measurestate = 0)
+    bool measurestate = true
+    while ( measurestate )
     {
 	uint8_t laststate    = HIGH;
 	uint8_t counter      = 0;
@@ -96,15 +96,12 @@ void read_dht_data()
                 FILE* fp = fopen(fileD,"a");
                 fprintf(fp,"%d/%d/%d-%d:%d,%.1f,%.1f",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min,c,h);
                 fclose(fp);
-        measurestate = 1;
-
-
-
-	}
+        measurestate = false;
+    }
 	else 
     {
 		printf( "Data not good, Remeasure\n" );
-
+        measurestate = true;
 /*                //시간측정
                 time_t timer;
                 struct tm *t;
@@ -115,6 +112,7 @@ void read_dht_data()
                 FILE* fp = fopen(fileD,"a");
                 fprintf(fp,"%d/%d/%d-%d:%d,,",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min);
                 fclose(fp);*/
+        
 
 
 	}
