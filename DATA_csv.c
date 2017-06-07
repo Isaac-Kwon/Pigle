@@ -25,7 +25,9 @@ void make_file()
 //DHT22
 void read_dht_data()
 {
-//measurseq:
+    int measurestate = 0;
+    while (measuestate != 0)
+    {
 	uint8_t laststate    = HIGH;
 	uint8_t counter      = 0;
  	uint8_t j            = 0, i;
@@ -94,15 +96,16 @@ void read_dht_data()
                 FILE* fp = fopen(fileD,"a");
                 fprintf(fp,"%d/%d/%d-%d:%d,%.1f,%.1f",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min,c,h);
                 fclose(fp);
+        measurestate = 1;
 
 
 
 	}
 	else 
     { goto measurseq;
-		printf( "Data not good, skip\n" );
+		printf( "Data not good, Remeasure\n" );
 
-                //시간측정
+/*                //시간측정
                 time_t timer;
                 struct tm *t;
                 timer = time(NULL);     //현재 시간 읽기
@@ -111,10 +114,11 @@ void read_dht_data()
                 //DATA.csv파일 쓰기
                 FILE* fp = fopen(fileD,"a");
                 fprintf(fp,"%d/%d/%d-%d:%d,,",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min);
-                fclose(fp);
+                fclose(fp);*/
 
 
 	}
+}
 }
 
 //PM2007
