@@ -87,7 +87,7 @@ void read_dht_data()
 			c = -c;
 		}
 
- 		printf( "Humidity = %.1f %% Temperature = %.1f *C Remeasured $d times\n", h, c, remeasuretime);
+ 		printf( "Humidity = %.1f %% Temperature = %.1f *C Remeasured %d times\n", h, c, remeasuretime);
 
                 //시간측정
                 time_t timer;
