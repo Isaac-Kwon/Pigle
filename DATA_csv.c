@@ -25,7 +25,7 @@ void make_file()
 //DHT22
 void read_dht_data()
 {
-    bool measurestate = true
+    bool measurestate = true;
     while ( measurestate )
     {
 	uint8_t laststate    = HIGH;
