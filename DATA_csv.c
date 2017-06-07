@@ -99,7 +99,7 @@ void read_dht_data()
 
 	}
 	else 
-    { goto measurseq
+    { goto measurseq;
 /*		printf( "Data not good, skip\n" );
 
                 //시간측정
