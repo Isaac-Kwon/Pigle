@@ -11,6 +11,9 @@
 //DHT22 설정에 필요한 변수값
 #define MAX_TIMINGS    85
 #define DHT_PIN        3    /* GPIO-22 */
+
+typedef enum {false, true} bool;
+
 int data[5] = { 0, 0, 0, 0, 0 };
 char fileD[] = "/home/pi/Pigle/tempD.csv";
 
