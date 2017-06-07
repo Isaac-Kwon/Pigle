@@ -12,7 +12,7 @@
 #define MAX_TIMINGS    85
 #define DHT_PIN        3    /* GPIO-22 */
 int data[5] = { 0, 0, 0, 0, 0 };
-char fileD[] = "/home/pi/pigle/tempD.csv";
+char fileD[] = "/home/pi/Pigle/tempD.csv";
 
 
 void make_file()
