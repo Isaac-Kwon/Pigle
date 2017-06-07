@@ -25,6 +25,7 @@ void make_file()
 //DHT22
 void read_dht_data()
 {
+    measurseq:
 	uint8_t laststate    = HIGH;
 	uint8_t counter      = 0;
  	uint8_t j            = 0, i;
@@ -98,8 +99,8 @@ void read_dht_data()
 
 	}
 	else 
-	{
-		printf( "Data not good, skip\n" );
+    { goto measurseq
+/*		printf( "Data not good, skip\n" );
 
                 //시간측정
                 time_t timer;
@@ -111,7 +112,7 @@ void read_dht_data()
                 FILE* fp = fopen(fileD,"a");
                 fprintf(fp,"%d/%d/%d-%d:%d,,",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min);
                 fclose(fp);
-
+*/
 
 	}
 }
