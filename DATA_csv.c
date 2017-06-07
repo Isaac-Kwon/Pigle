@@ -182,7 +182,7 @@ void read_pm_data()
 	                //DATA.csv파일 쓰기
         	        FILE* fp = fopen(fileD,"a");
                		fprintf(fp,",%.0f,%.0f",dustValue,dustValue10);
-			fprintf(fp,"\n");
+
 			fclose(fp);
 		}
 		else		//측정실패
@@ -206,7 +206,12 @@ int main( void )
 //	while ( 1 )
 //	{
 		read_dht_data();
-		read_pm_data();
+//		read_pm_data();
+    
+        FILE* fp = fopen(fileD,"a");
+        fprintf(fp,"\n");
+        fclose(fp);
+
 	
 
 //		delay( 60000 ); /* wait 60 seconds before next read */
