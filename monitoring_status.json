@@ -5,21 +5,21 @@
 
     "hysteresis":{
         "high":{
-            "send":{"temperature": "27", "Humidity": ""},
-            "reset":{"temperature": "25", "Humidity": ""}
+            "send":{"temperature": "26", "humidity": "60"},
+            "reset":{"temperature": "24", "humidity": "50"}
         },
         
         "low":{
-            "send":{"temperature": "", "Humidity": ""},
-            "reset":{"temperature": "", "Humidity": ""}
+            "send":{"temperature": "14", "humidity": "15"},
+            "reset":{"temperature": "16", "humidity": "30"}
         }
     },
 
     "log":{
-        "start":"2017/06/13-14:3",
-        "count":"12",
-        "status":"high"
-        "status_hysteresis":"false"
+        "start":{"temperature":"2017/06/13-14:3","humidity":"2017/06/13-13:58"},
+        "count":{"temperature":"24","humidity":"high"},
+        "status": {"temperature":"high","humidity":"high"},
+        "status_hysteresis":{"temperature":"false","humidity":"true"}
     }
     
 }
