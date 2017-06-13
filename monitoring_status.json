@@ -1,0 +1,25 @@
+{
+
+    "current":{"time" : "2017/06/13-14:0", "temperature" : "36.1", "humidity" : "56.1"},
+
+
+    "hysteresis":{
+        "high":{
+            "send":{"temperature": "27", "Humidity": ""},
+            "reset":{"temperature": "25", "Humidity": ""}
+        },
+        
+        "low":{
+            "send":{"temperature": "", "Humidity": ""},
+            "reset":{"temperature": "", "Humidity": ""}
+        }
+    },
+
+    "log":{
+        "start":"2017/06/13-14:3",
+        "count":"12",
+        "status":"high"
+        "status_hysteresis":"false"
+    }
+    
+}
