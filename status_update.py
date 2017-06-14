@@ -33,10 +33,18 @@ nowtemp = num(nowdata[1])
 nowhum = num(nowdata[2])
 
 #===================================================#
-
 #data inspection (nowdata)
-inspect_temp = [0,num(data["hysteresis"]["low"]["send"]["temperature"]), num(data["hysteresis"]["low"]["reset"]["temperature"]), num(data["hysteresis"]["high"]["reset"]["temperature"]), num(data["hysteresis"]["low"]["send"]["temperature"]) ,100]
-inspect_hum = [0,num(data["hysteresis"]["low"]["send"]["humidity"]), num(data["hysteresis"]["low"]["reset"]["humidity"]), num(data["hysteresis"]["high"]["reset"]["humidity"]), num(data["hysteresis"]["low"]["send"]["humidity"]) ,100]
+
+# : duplicate hystereses and configuring regions
+
+lowest = 0
+highest = 100
+
+inspect_temp = [lowest,num(data["hysteresis"]["low"]["send"]["temperature"]), num(data["hysteresis"]["low"]["reset"]["temperature"]), num(data["hysteresis"]["high"]["reset"]["temperature"]), num(data["hysteresis"]["low"]["send"]["temperature"]) ,highest]
+inspect_hum = [lowest,num(data["hysteresis"]["low"]["send"]["humidity"]), num(data["hysteresis"]["low"]["reset"]["humidity"]), num(data["hysteresis"]["high"]["reset"]["humidity"]), num(data["hysteresis"]["low"]["send"]["humidity"]) ,highest]
+
+
+instemp = 6 #initialize region value
 
 for i in range(5):
     ins_low = inspect_temp[i]
@@ -44,6 +52,10 @@ for i in range(5):
     #
     if ins_low<nowtemp and ins_high>nowtemp:
         instemp = i
+
+inshum = 6 #initialize region value
+
+i = 6
 
 for i in range(5):
     ins_low = inspect_hum[i]
