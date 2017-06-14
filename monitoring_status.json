@@ -18,8 +18,7 @@
     "log":{
         "start":{"temperature":"2017/06/13-14:3","humidity":"2017/06/13-13:58"},
         "count":{"temperature":"24","humidity":"high"},
-        "status": {"temperature":"high","humidity":"high"},
-        "status_hysteresis":{"temperature":"false","humidity":"true"}
+        "status": {"temperature":"high","humidity":"high"}
     }
     
 }
