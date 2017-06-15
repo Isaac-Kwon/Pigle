@@ -1,0 +1,10 @@
+{
+    "from":{
+        "id":"id",
+        "password":"password",
+        "smtp":"smtp_server",
+        "smtp_port":000
+    },
+    
+    "to":"toemail"
+}
