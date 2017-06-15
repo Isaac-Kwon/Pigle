@@ -1,23 +1,23 @@
 {
 
-    "current":{"time" : "2017/06/13-14:0", "temperature" : "36.1", "humidity" : "56.1"},
+    "current":{"time" : "2017/06/13-14:0", "temperature" : 36.1, "humidity" : 56.1},
 
 
     "hysteresis":{
         "high":{
-            "send":{"temperature": "26", "humidity": "60"},
-            "reset":{"temperature": "24", "humidity": "50"}
+            "send":{"temperature": 26, "humidity": 60},
+            "reset":{"temperature": 24, "humidity": 50}
         },
         
         "low":{
-            "send":{"temperature": "14", "humidity": "15"},
-            "reset":{"temperature": "16", "humidity": "30"}
+            "send":{"temperature": 14, "humidity": 15},
+            "reset":{"temperature": 16, "humidity": 30}
         }
     },
 
     "log":{
         "start":{"temperature":"2017/06/13-14:3","humidity":"2017/06/13-13:58"},
-        "count":{"temperature":"24","humidity":"11"},
+        "count":{"temperature":24,"humidity":11},
         "status": {"temperature":"high","humidity":"high"}
     }
     

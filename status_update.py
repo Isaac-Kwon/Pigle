@@ -42,8 +42,8 @@ nowhum = num(nowdata[2])
 lowest = 0
 highest = 100
 
-inspect_temp = [lowest,num(data["hysteresis"]["low"]["send"]["temperature"]), num(data["hysteresis"]["low"]["reset"]["temperature"]), num(data["hysteresis"]["high"]["reset"]["temperature"]), num(data["hysteresis"]["low"]["send"]["temperature"]) ,highest]
-inspect_hum = [lowest,num(data["hysteresis"]["low"]["send"]["humidity"]), num(data["hysteresis"]["low"]["reset"]["humidity"]), num(data["hysteresis"]["high"]["reset"]["humidity"]), num(data["hysteresis"]["low"]["send"]["humidity"]) ,highest]
+inspect_temp = [lowest,data["hysteresis"]["low"]["send"]["temperature"], data["hysteresis"]["low"]["reset"]["temperature"], data["hysteresis"]["high"]["reset"]["temperature"], data["hysteresis"]["low"]["send"]["temperature"] ,highest]
+inspect_hum = [lowest,data["hysteresis"]["low"]["send"]["humidity"], data["hysteresis"]["low"]["reset"]["humidity"], data["hysteresis"]["high"]["reset"]["humidity"], data["hysteresis"]["low"]["send"]["humidity"],highest]
 
 
 instemp = 6 #initialize region value
