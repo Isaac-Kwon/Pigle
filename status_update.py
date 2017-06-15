@@ -18,6 +18,7 @@ nowdata = totalD[len(totalD)-1]
 with open('monitoring_status.json') as statusfile:
     data = json.load(statusfile)
 
+data_store = data
 recorddata = [data["current"]["time"], data["current"]["temperature"], data["current"]["humidity"]]
 
 #===================================================#
@@ -112,7 +113,7 @@ elif data["log"]["status"]["temperature"] == "low" and (instemp in [5]):
 
 ##humidity
 
-humlog_status = [0,0,0,0,0,0] #High Low 시작, 종료, 지속, Low Log 시작, 종료, 지속
+humlog_status = [0,0,0,0,0,0] #High log 시작, 종료, 지속, Low log 시작, 종료, 지속
 
 if data["log"]["status"]["humidity"] == "high" and (inshum in [1]):
     # 이전 상태가 HIGH LOGGING 상태이면서, 현태 상태가 LOW 인 경우
@@ -149,6 +150,58 @@ elif data["log"]["status"]["humidity"] == "low" and (inshum in [3,4]):
 elif data["log"]["status"]["humidity"] == "low" and (inshum in [5]):
     # 이전 상태가 LOW LOGGING 상태이면서, 현태 상태가 High 인 경우
     # LOW LOGGING 을 중단하고, HIGH LOGGING 을 시작함.
+    humlog_status = [1,0,0,0,1,0]
+
+#===================================================#
+#logging dictionary data
+
+#when stop logging
+if templog_status[1] == 1 or templog_status[4] == 1:
+    data["log"]["status"]["temperature"] = "normal"
+
+if humlog_status[1] == 1 or humlog_status[4] == 1:
+    data["log"]["status"]["humidity"] = "normal"
+
+#when start high logging
+if templog_status[0] == 1:
+    data["log"]["start"]["temperature"] = nowtime
+    data["log"]["status"]["temperature"] = "high"
+    data["log"]["count"]["temperature"] = 0
+
+if humlog_status[0] == 1:
+    data["log"]["start"]["humidity"] = nowtime
+    data["log"]["status"]["humidity"] = "high"
+    data["log"]["count"]["humidity"] = 0
+
+#when start low logging
+if templog_status[3] == 1:
+    data["log"]["start"]["temperature"] = nowtime
+    data["log"]["status"]["temperature"] = "low"
+    data["log"]["count"]["temperature"] = 0
+
+if humlog_status[3] == 1:
+    data["log"]["start"]["humidity"] = nowtime
+    data["log"]["status"]["humidity"] = "low"
+    data["log"]["count"]["humidity"] = 0
+
+
+# when continue log
+
+if templog_status[2] == 1 or templog_status[5] == 1:
+    data["log"]["count"]["temperature"] = data["log"]["count"]["temperature"] + 1
+
+if humlog_status[2] == 1 or humlog_status[5] == 1:
+    data["log"]["count"]["humidity"] = data["log"]["count"]["humidity"] + 1
+
+data["current"]["time"] = nowtime
+data["current"]["humidity"] = nowhum
+data["current"]["temperature"] = nowtemp
+
+with open('monitoring_status.json','w') as statusfile:
+    json.dump(data,statusfile)
+
+
+
     #
 
 
