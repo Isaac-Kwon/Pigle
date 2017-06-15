@@ -2,3 +2,4 @@ client_secret.*
 *.save
 hello.json
 .DS_Store
+monitoring_status.json
