@@ -2,6 +2,11 @@
 
 import csv
 import json
+import subprocess
+
+import sys, os
+
+import base64
 
 #===================================================#
 
@@ -200,9 +205,66 @@ data["current"]["temperature"] = nowtemp
 with open('monitoring_status.json','w') as statusfile:
     json.dump(data,statusfile)
 
+#===================================================#
+
+# Sending Email if something strange
+#
+logcount = 0
+## when end logging, log data will output.
+if templog_status[2] == 1 or templog_status[5] == 1:
+    logcount = data["log"]["count"]["temperature"]
+
+if humlog_status[2] == 1 or humlog_status[5] == 1:
+    logcount = data["log"]["count"]["humidity"]
+
+if logcount != 0:
+## Data collection to send
+    with open('tempD.csv', 'rb') as csvfile:
+        spamreader  = csv.reader(csvfile,delimiter=',')
+        totalD = list(spamreader)
+        logD = totalD[(len(totalD) - logcount - 1) : len(totalD) - 1]
+    f = 'tempD_send.csv'
+    with open(f, 'wb') as logfile:
+        spamwriter = csv.writer(logfile)
+        spamwriter.writerow(["TimeStamp", "Temperature", "Humidity"])
+        for inD in logD:
+            spamwriter.writerow(inD)
+
+if templog_status[1] == 1 or templog_status[4] == 1 or humlog_status[1] == 1 or humlog_status[4] == 1 or templog_status[2] == 1 or templog_status[5] == 1 or humlog_status[2] == 1 or humlog_status[5] == 1:
+    if templog_status[2] == 1 or templog_status[5] == 1 or humlog_status[2] == 1 or humlog_status[5] == 1:
+        #Send when end logging
+        alertt = ""
+        if templog_status[2] == 1:
+            alertt = alertt + " high temperature"
+        if templog_status[5] == 1:
+            alertt = alertt + " low temperature"
+        if humlog_status[2] == 1:
+            alertt = alertt + " high humidity"
+        if humlog_status[5] == 1:
+            alertt = alertt + " low humidity"
+        print("Write text for Ending Logging")
+        with open('mailtext.txt','wb') as mailtextfile:
+            mailtextfile.write("This is mail to alert end logging (" + alertt + " ). \nCurrent time is " + nowtime + ".\n" "And, condition of this time is " + str(nowtemp) + "*C, " + str(nowhum) + "%. ")
+        os.system('sh sendmail_shells/send_alert_end_log.sh')
+
+    if templog_status[1] == 1 or templog_status[4] == 1 or humlog_status[1] == 1 or humlog_status[4] == 1:
+        #Send when start logging
+        alertt = ""
+        if templog_status[1] == 1:
+            alertt = alertt + " high temperature"
+        if templog_status[4] == 1:
+            alertt = alertt + " low temperature"
+        if humlog_status[1] == 1:
+            alertt = alertt + " high humidity"
+        if humlog_status[4] == 1:
+            alertt = alertt + " low humidity"
+        print("Write text for Starting Logging")
+        with open('mailtext.txt','wb') as mailtextfile:
+            mailtextfile.write("This is mail to alert starting logging. \nCurrent time is " + nowtime + ".\n" "And, the alert condition of" + alertt + " is " + str(nowtemp) + "*C, " + str(nowhum) + "%. ")
+        os.system('sh sendmail_shells/send_alert.sh')
 
 
-    #
+
 
 
 
