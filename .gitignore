@@ -5,3 +5,4 @@ hello.json
 monitoring_status.json
 tempD_send.csv
 tempD.csv
+sendmail_shells/*
