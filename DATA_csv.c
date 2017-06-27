@@ -100,6 +100,10 @@ void read_dht_data()
                 fprintf(fp,"%d/%d/%d-%d:%d,%.1f,%.1f,%d",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min,c,h,remeasuretime);
                 fclose(fp);
         measurestate = false;
+        
+        if(h>200||c>200){
+            measurestate = false;
+        }
     }
 	else 
     {
