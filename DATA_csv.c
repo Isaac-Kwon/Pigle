@@ -102,7 +102,7 @@ void read_dht_data()
         measurestate = false;
         
         if(h>200||c>200){
-            measurestate = false;
+            measurestate = true;
         }
     }
 	else 
