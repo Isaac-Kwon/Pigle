@@ -97,7 +97,7 @@ void read_dht_data()
 
                 //DATA.csv파일 쓰기
                 FILE* fp = fopen(fileD,"a");
-                fprintf(fp,"%d/%d/%d-%d:%d,%.1f,%.1f,%d",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min,c,h,remeasuretime);
+                fprintf(fp,"%d/%d/%d-%d:%d,%.1f,%.1f,%d\n",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min,c,h,remeasuretime);
                 fclose(fp);
         measurestate = false;
         
@@ -212,9 +212,9 @@ int main( void )
 		read_dht_data();
 //		read_pm_data();
     
-        FILE* fp = fopen(fileD,"a");
-        fprintf(fp,"\n");
-        fclose(fp);
+//        FILE* fp = fopen(fileD,"a");
+//        fprintf(fp,"\n");
+//        fclose(fp);
 
 	
 
