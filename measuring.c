@@ -15,7 +15,7 @@
 typedef enum {false, true} bool;
 
 int data[5] = { 0, 0, 0, 0, 0 };
-char fileD[] = "/home/pi/Pigle/tempD.csv";
+char fileD[] = "tempD.csv";
 
 
 void make_file()
