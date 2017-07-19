@@ -1,1 +1,1 @@
-gcc -o measuring DATA_csv.c -l wiringPi
+gcc -o measuring measuring.c -l wiringPi
