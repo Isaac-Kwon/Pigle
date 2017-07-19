@@ -8,7 +8,7 @@ import csv
 print('upload sequence start')
 
 #json_key = json.load(open('hello.json'))
-json_key = 'hello.json'
+json_key = 'credentialKey.json'
 scope = ['https://spreadsheets.google.com/feeds']
 #credentials = SignedJwtAssertionCredentials(json_key['client_email'], json_key['private_key'], scope)
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key, scope)

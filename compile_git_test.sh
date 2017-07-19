@@ -1,5 +1,5 @@
 git pull
-gcc -o hello DATA_csv.c -l wiringPi
+gcc -o measuring measuring.c -l wiringPi
 
 
-sudo ./hello
+sudo ./measuring
