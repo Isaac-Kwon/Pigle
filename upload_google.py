@@ -27,7 +27,7 @@ with open('tempD.csv', 'rb') as f:
 	imdata = totalD[len(totalD)-1]
 
 datenormal = datetime.datetime.strptime(imdata[0],'%Y-%M-%d %H:%S')
-imdata[0] = datenoraml.strftime('%Y-%M-%d %H:%S')
+imdata[0] = datenormal.strftime('%Y-%M-%d %H:%S')
 
 kk.append_row(imdata)
 
