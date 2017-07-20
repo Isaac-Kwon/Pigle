@@ -16,7 +16,10 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key, scope)
 gc = gspread.authorize(credentials)
 print('google authorized')
 
-kk = gc.open('THMonitoring').sheet1
+with open('cfg.json','w') as infile:
+    fname = json.load(infile)
+
+kk = gc.open(fname['Filename']).worksheet(fname['Sheetname'])
 print('open spreadsheet')
 
 imdata = [None]*5
