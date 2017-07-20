@@ -1,5 +1,6 @@
 import json
 import gspread
+import datetime
 #from  oauth2client.client  import SignedJwtAssertionCredentials
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -28,9 +29,9 @@ with open('tempD.csv', 'rb') as f:
         totalD = list(reader)
 	imdata = totalD[len(totalD)-1]
 
+datenormal = datetime.datetime.strptime(imdata[0],'%Y-%M-%d %H:%S')
+imdata[0] = datenoraml.strftime('%Y-%M-%d %H:%S')
+
 kk.append_row(imdata)
 
 print('data upload completed')
-#values_list = kk.col_values(1)
-
-#print(values_list)
