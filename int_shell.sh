@@ -1,6 +1,6 @@
 while true
 do
-./measuring
+sudo ./measuring
 
 sudo python upload_google.py
 
