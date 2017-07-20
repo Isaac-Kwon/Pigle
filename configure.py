@@ -45,5 +45,5 @@ if __name__ == "__main__":
     print('')
     print(jsonString)
     #
-    with open('cfg.json', 'w') as outfile:
+    with open('cfg.json', 'r') as outfile:
         json.dump(outputjson, outfile, ensure_ascii=False)
