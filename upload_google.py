@@ -16,7 +16,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key, scope)
 gc = gspread.authorize(credentials)
 print('google authorized')
 
-with open('cfg.json','w') as infile:
+with open('cfg.json','r') as infile:
     fname = json.load(infile)
 
 kk = gc.open(fname['Filename']).worksheet(fname['Sheetname'])
