@@ -155,9 +155,9 @@ def main(verbose=False):
             if verbose:
                 print('UploadProcess::Start::PID %d' %(uproc.pid))
             uproc.join()
-            del(uproc)
             if verbose:
                 print('UploadProcess::End::PID %d' %(uproc.pid))
+            del(uproc)
     except KeyboardInterrupt:
         mproc.terminate()
         if verbose:
