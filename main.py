@@ -114,7 +114,7 @@ def SetLastRow(verbose=False):
         if verbose:
             print('UploadProcess::LastRowSetting::One Blank line deleted')
 
-def monitoringProcess(verbose=false): #monitoring sequence for multiprocessing
+def monitoringProcess(verbose=False): #monitoring sequence for multiprocessing
     if verbose:
         print('MonitoringProcess::Start::PID %d' %(os.getpid()))
     while true:
