@@ -151,7 +151,11 @@ def main(verbose=False):
             del(uproc)
     except KeyboardInterrupt:
         mproc.terminate()
+        if verbose:
+            print('MonitoringProcess::Terminated')
         uproc.join()
+        if verbose:
+            print('UploadProcess::Exit')
         raise
     except:
         pass
