@@ -117,7 +117,7 @@ def SetLastRow(verbose=False):
 def monitoringProcess(verbose=False): #monitoring sequence for multiprocessing
     if verbose:
         print('MonitoringProcess::Start::PID %d' %(os.getpid()))
-    while true:
+    while True:
         if verbose:
             print('MonitoringProcess::Start Loop' %(os.getpid()))
         monitoringSeq()
