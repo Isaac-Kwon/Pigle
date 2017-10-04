@@ -150,8 +150,7 @@ def main(verbose=False):
             uproc = Process(target=uploadingProcess, args=(True,))
             uproc.start()
             print('UploadProcess::Start::PID %d' %(uproc.pid))
-            while uproc.is_alive():
-                pass
+            uproc.join()
             del(uproc)
     except KeyboardInterrupt:
         mproc.terminate()
