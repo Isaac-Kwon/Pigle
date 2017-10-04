@@ -90,7 +90,7 @@ def UploadSeq2(verbose=False): #delayed uploading (one by one dataline)
         imdata = totalD[0]
         if verbose:
             print('Sending to google...')
-        datenormal = datetime.strptime(imdata[0],'%Y/%M/%d-%H:%S')
+        datenormal = datetime.strptime(imdata[0],'%Y-%M-%d %H:%S')
         imdata[0] = datenormal.strftime('%Y-%M-%d %H:%S')
         sheet.append_row(imdata)
         if verbose:
