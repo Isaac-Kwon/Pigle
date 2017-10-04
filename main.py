@@ -14,7 +14,7 @@ transfercsv = 'tempD.csv'
 savingcsv = 'tempsaving.csv'
 
 def monitoringSeq():
-    subprocess.call(["sudo", "./monitoring"])
+    subprocess.call(["sudo", "./measuring"])
 
 def GetSpreadsheet(verbose=False):
     if verbose:
@@ -116,7 +116,7 @@ def SetLastRow(verbose=False):
 
 def monitoringProcess(): #monitoring sequence for multiprocessing
     monitoringSeq()
-    time.sleep(second)
+    time.sleep(60)
 
 def monitoringProcessLoop():
     while True:
