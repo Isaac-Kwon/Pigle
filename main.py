@@ -148,7 +148,7 @@ def main(verbose=False):
         uploadingProcessN = 1
         mproc = Process(target=monitoringProcess, args=(True,))
         mproc.start()
-        SetLastRow()
+        SetLastRow(verbose=True)
         while True:
             uproc = Process(target=uploadingProcess, args=(True,))
             uproc.start()
