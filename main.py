@@ -139,7 +139,7 @@ def main(verbose=False):
     try:
         monitoringProcessN = 1
         uploadingProcessN = 1
-        mproc = Process(target=monitoringProcess)
+        mproc = Process(target=monitoringProcess, args=(True,))
         mproc.start()
         SetLastRow()
         while True:
