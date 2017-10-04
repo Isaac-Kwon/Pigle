@@ -98,6 +98,9 @@ def UploadSeq2(verbose=False): #delayed uploading (one by one dataline)
         return True
     else:
         print('Skip upload sequence')
+        time.sleep(10)
+        if verbose:
+            print('UploadProcess::UploadSequence::Sleep 10sec.')
         return False
 
 def CheckLastRow(rowcnt=0):
