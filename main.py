@@ -121,7 +121,7 @@ def monitoringProcess(verbose=False): #monitoring sequence for multiprocessing
         print('MonitoringProcess::Start::PID %d' %(os.getpid()))
     while True:
         if verbose:
-            print('MonitoringProcess::Start Loop' %(os.getpid()))
+            print('MonitoringProcess::Start Loop')
         monitoringSeq()
         time.sleep(60)
 
