@@ -152,9 +152,12 @@ def main(verbose=False):
         while True:
             uproc = Process(target=uploadingProcess, args=(True,))
             uproc.start()
-            print('UploadProcess::Start::PID %d' %(uproc.pid))
+            if verbose:
+                print('UploadProcess::Start::PID %d' %(uproc.pid))
             uproc.join()
             del(uproc)
+            if verbose:
+                print('UploadProcess::End::PID %d' %(uproc.pid))
     except KeyboardInterrupt:
         mproc.terminate()
         if verbose:
