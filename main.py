@@ -95,8 +95,10 @@ def UploadSeq2(verbose=False): #delayed uploading (one by one dataline)
         sheet.append_row(imdata)
         if verbose:
             print('UploadProcess::UploadSequence::Completed Uploading 1 dataline')
+        return True
     else:
         print('Skip upload sequence')
+        return False
 
 def CheckLastRow(rowcnt=0):
     sheet = GetSpreadsheet()
@@ -127,9 +129,11 @@ def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) f
     try:
         if os.path.exists(transfercsv):
             unifier(savingcsv,transfercsv,deleting=True,verbose=verbose)
-        UploadSeq2(verbose=verbose)
-        highdeleter(savingcsv)
-        print('UploadProcess::Delete head of saved data')
+        upstate = UploadSeq2(verbose=verbose)
+        if upstate:
+            highdeleter(savingcsv)
+            if verbose:
+                print('UploadProcess::Delete head of saved data')
     except gspread.exceptions.RequestError:
         SetLastRow()
     except:
