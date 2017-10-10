@@ -13,13 +13,13 @@ class Mail:
         self.Bcc = Bcc
         self.verbose=verbose
     def sendMail(self, textfilename='MailTemp.temp'):
-        subprocess.call(["sendmail", "-vt", "<" ,templateFile])
+        subprocess.call(["sendmail", "-vt", "<" ,textfilename])
     def writeMail(self, textfilename='MailTemp.temp'):
         if None in [self.To, self.From]:
             if self.verbose:
                 print("Sendmail::No TO or FROM e-mail address. abort")
             return
-        with open(Filename,'w') as mailFile:
+        with open(textfilename,'w') as mailFile:
             mailFile.writelines(self.templateHead[0] + self.To + "\n")
             if not self.Sub is None:
                 mailFile.writelines(self.templateHead[1] + self.Sub + "\n")
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     testmail = Mail(To=testmailto, Sub="Sendmail Software Test", From=testmailfrom)
     testmail.Par = "Mail for test Sendmail software with Python script. \n if you didn\'t do test, just ignore. \n the configuration number is " + str(configInt) + " \n\n Best Regards. \n Sendmail Test Software." 
     testmail.writeMail()
-    print("E-mail is written, will be sent.\n If it went by too long (over 2 min.), Do KeyboardInterrupt (Ctrl+C) and check your sendmail software")
+    print("E-mail is written, will be sent.\nIf it went by too long (over 2 min.), Do KeyboardInterrupt (Ctrl+C) and check your sendmail software")
     print("Sending Sequence Start.")
     testmail.sendMail()
     print("E-mail to test Sendmail software is sent")
