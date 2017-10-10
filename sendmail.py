@@ -13,8 +13,9 @@ class Mail:
         self.Bcc = Bcc
         self.verbose=verbose
     def sendMail(self, textfilename='MailTemp.temp'):
-        mailtext = open(textfilename,"r")
-        subprocess.Popen("sendmail","-vt", stdin=mailtext)
+        mailtext = open(textfilename)
+        p=subprocess.Popen(["sendmail","-vt"], stdin=mailtext)
+        p.wait()
     def writeMail(self, textfilename='MailTemp.temp'):
         if None in [self.To, self.From]:
             if self.verbose:
