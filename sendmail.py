@@ -13,7 +13,8 @@ class Mail:
         self.Bcc = Bcc
         self.verbose=verbose
     def sendMail(self, textfilename='MailTemp.temp'):
-        subprocess.call(["sendmail", "-vt", "<" ,textfilename])
+        mailtext = open(textfilename,"r")
+        subprocess.Popen("sendmail","-vt", stdin=mailtext)
     def writeMail(self, textfilename='MailTemp.temp'):
         if None in [self.To, self.From]:
             if self.verbose:
