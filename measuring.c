@@ -86,9 +86,7 @@ void read_dht_data()
 		{
 			c = -c;
 		}
-
  		printf( "Humidity = %.1f %% Temperature = %.1f *C Remeasured %d times\n", h, c, remeasuretime);
-
                 //시간측정
                 time_t timer;
                 struct tm *t;
@@ -101,28 +99,16 @@ void read_dht_data()
                 fclose(fp);
         measurestate = false;
         
-        if(h>200||c>200){
+        if(h>150||c>150){
             measurestate = true;
+            delay(2500)
         }
     }
 	else 
     {
-//		printf( "Data not good, Remeasure\n" );
         measurestate = true;
-/*                //시간측정
-                time_t timer;
-                struct tm *t;
-                timer = time(NULL);     //현재 시간 읽기
-                t = localtime(&timer);  //분리하여 구조체에 넣기
-
-                //DATA.csv파일 쓰기
-                FILE* fp = fopen(fileD,"a");
-                fprintf(fp,"%d/%d/%d-%d:%d,,",t->tm_year + 1900,t->tm_mon +1, t->tm_mday, t->tm_hour, t->tm_min);
-                fclose(fp);*/
+            delay(2500)
         remeasuretime++;
-        
-
-
 	}
 }
 }
@@ -207,19 +193,7 @@ int main( void )
  
 	make_file();
 		printf("\n");
-//	while ( 1 )
-//	{
-		read_dht_data();
-//		read_pm_data();
-    
-//        FILE* fp = fopen(fileD,"a");
-//        fprintf(fp,"\n");
-//        fclose(fp);
 
-	
-
-//		delay( 60000 ); /* wait 60 seconds before next read */
-//	}
  
 	return(0);
 }
