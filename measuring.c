@@ -101,13 +101,13 @@ void read_dht_data()
         
         if(h>150||c>150){
             measurestate = true;
-            delay(2500)
+            delay(2500);
         }
     }
 	else 
     {
         measurestate = true;
-            delay(2500)
+        delay(2500);
         remeasuretime++;
 	}
 }
