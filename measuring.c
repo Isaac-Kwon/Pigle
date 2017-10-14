@@ -194,7 +194,7 @@ int main( void )
 	make_file();
 		printf("\n");
 
-    read_dht_data()
+    read_dht_data();
  
 	return(0);
 }
