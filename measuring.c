@@ -190,10 +190,11 @@ int main( void )
 {
 	if ( wiringPiSetup() == -1 )
 	exit( 1 );
- 
+    
 	make_file();
 		printf("\n");
 
+    read_dht_data()
  
 	return(0);
 }
