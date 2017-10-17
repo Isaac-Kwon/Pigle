@@ -144,20 +144,11 @@ def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) f
 
 def main(verbose=False):
     try:
-        monitoringProcessN = 1
-        uploadingProcessN = 1
         mproc = Process(target=monitoringProcess, args=(True,))
         mproc.start()
         SetLastRow(verbose=True)
         while True:
-            uproc = Process(target=uploadingProcess, args=(True,))
-            uproc.start()
-            if verbose:
-                print('UploadProcess::Start::PID %d' %(uproc.pid))
-            uproc.join()
-            if verbose:
-                print('UploadProcess::End::PID %d' %(uproc.pid))
-            del(uproc)
+            uploadingProcess(True)
     except KeyboardInterrupt:
         mproc.terminate()
         if verbose:
