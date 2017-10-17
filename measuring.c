@@ -10,7 +10,7 @@
 
 //DHT22 설정에 필요한 변수값
 #define MAX_TIMINGS    85
-#define DHT_PIN        3    /* GPIO-22 */
+#define DHT_PIN        0    /* GPIO-22 */
 
 typedef enum {false, true} bool;
 
@@ -69,7 +69,7 @@ void read_dht_data()
 		{
 			/* shove each bit into the storage bytes */
 			data[j / 8] <<= 1;
-			if ( counter > 16 )
+			if ( counter > 32 )
 			data[j / 8] |= 1;
 			j++;
   		}
