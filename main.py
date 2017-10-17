@@ -146,6 +146,9 @@ def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) f
         raise
 
 def ClockProcess(verbose=False):
+    time.sleep(10)
+    if verbose:
+        print('ClockProcess::Start::PID %d' %(os.getpid()))
     while True:
         if verbose:
             print(datetime.now().strftime('TIME: %Y/%m/%d-%H:%M:%S'))
