@@ -142,18 +142,29 @@ def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) f
     except:
         raise
 
+def ClockProcess(verbose=False):
+    while True:
+        if verbose:
+            print(datetime.now().strftime('TIME: %Y/%m/%d-%H:%M:%S\n'))
+            time.sleep(60)
+
+
 def main(verbose=False):
     try:
         mproc = Process(target=monitoringProcess, args=(True,))
         mproc.start()
+        tproc = Process(target=ClockProcess, args=(True,))
+        tproc.start()
         SetLastRow(verbose=True)
         while True:
             uploadingProcess(True)
     except KeyboardInterrupt:
         mproc.terminate()
+        tproc.terminate()
         if verbose:
             print('MonitoringProcess::Terminated')
         uproc.join()
+        tproc.join()
         if verbose:
             print('UploadProcess::Exit')
         raise
