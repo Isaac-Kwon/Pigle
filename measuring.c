@@ -192,7 +192,7 @@ int main( void )
 	exit( 1 );
     
 	make_file();
-		printf("\n");
+    printf("WP binary start.\n");
 
     read_dht_data();
  
