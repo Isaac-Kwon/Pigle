@@ -138,6 +138,8 @@ def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) f
             if verbose:
                 print('UploadProcess::Delete head of saved data')
     except gspread.exceptions.RequestError:
+        if verbose:
+            print('UploadProcess::Upload Failed, Re-Try')
         SetLastRow()
     except:
         raise
