@@ -125,6 +125,7 @@ def monitoringProcess(verbose=False): #monitoring sequence for multiprocessing
     while True:
         if verbose:
             print('MonitoringProcess::Start Loop')
+            print(datetime.now().strftime('TIME: %Y/%m/%d-%H:%M:%S'))
         monitoringSeq()
         time.sleep(60)
 
@@ -147,7 +148,7 @@ def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) f
 def ClockProcess(verbose=False):
     while True:
         if verbose:
-            print(datetime.now().strftime('TIME: %Y/%m/%d-%H:%M:%S\n'))
+            print(datetime.now().strftime('TIME: %Y/%m/%d-%H:%M:%S'))
             time.sleep(30)
 
 
