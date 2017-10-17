@@ -146,7 +146,7 @@ def ClockProcess(verbose=False):
     while True:
         if verbose:
             print(datetime.now().strftime('TIME: %Y/%m/%d-%H:%M:%S\n'))
-            time.sleep(60)
+            time.sleep(30)
 
 
 def main(verbose=False):
@@ -167,7 +167,6 @@ def main(verbose=False):
         tproc.join()
         if verbose:
             print('UploadProcess::Exit')
-        raise
     except:
         pass
 
