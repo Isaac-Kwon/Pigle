@@ -7,6 +7,7 @@ import csv
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+
 import timeout_decorator
 
 from sendmail import Mail
@@ -133,10 +134,10 @@ def monitoringProcess(verbose=False): #monitoring sequence for multiprocessing
         monitoringSeq()
         time.sleep(60)
 
-
-
 @timeout_decorator.timeout(120)
 def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) for multiprocessing
+    if verbose:
+        print('UploadProcess::Start Uploading Sequence')
     try:
         if os.path.exists(transfercsv):
             unifier(savingcsv,transfercsv,deleting=True,verbose=verbose)
