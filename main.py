@@ -7,7 +7,10 @@ import csv
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import timeout_decorator
+
 from sendmail import Mail
+
 json_key = 'credentialKey.json'
 scope = ['https://spreadsheets.google.com/feeds']
 
@@ -130,6 +133,9 @@ def monitoringProcess(verbose=False): #monitoring sequence for multiprocessing
         monitoringSeq()
         time.sleep(60)
 
+
+
+@timeout_decorator.timeout(120)
 def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) for multiprocessing
     try:
         if os.path.exists(transfercsv):
@@ -155,7 +161,6 @@ def ClockProcess(verbose=False):
             print(datetime.now().strftime('TIME: %Y/%m/%d-%H:%M:%S'))
             time.sleep(30)
 
-
 def main(verbose=False):
     try:
         mproc = Process(target=monitoringProcess, args=(True,))
@@ -179,14 +184,3 @@ def main(verbose=False):
 
 if __name__=="__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
