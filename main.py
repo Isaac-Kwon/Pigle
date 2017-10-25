@@ -134,7 +134,7 @@ def monitoringProcess(verbose=False): #monitoring sequence for multiprocessing
         monitoringSeq()
         time.sleep(60)
 
-@timeout_decorator.timeout(120)
+@timeout_decorator.timeout(40)
 def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) for multiprocessing
     if verbose:
         print('UploadProcess::Start Uploading Sequence')
@@ -160,7 +160,7 @@ def ClockProcess(verbose=False):
     while True:
         if verbose:
             print(datetime.now().strftime('TIME: %Y/%m/%d-%H:%M:%S'))
-            time.sleep(30)
+            time.sleep(20)
 
 def main(verbose=False):
     try:
@@ -170,7 +170,12 @@ def main(verbose=False):
         tproc.start()
         SetLastRow(verbose=True)
         while True:
-            uploadingProcess(True)
+            try:
+                uploadingProcess(True)
+            except imeout_decorator.timeout_decorator.TimeoutError:
+                if verbose:
+                    print('UploadProcess::Uploading Timeout. Kill and Reload.')
+                pass
     except KeyboardInterrupt:
         mproc.terminate()
         tproc.terminate()
