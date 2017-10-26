@@ -1,5 +1,5 @@
 import sys, os, subprocess
-from multiprocessing import Process, current_process
+from multiprocessing import Process, Pipe, current_process
 import time
 import json
 from datetime import datetime
@@ -10,6 +10,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 import timeout_decorator
 
+import limiter
+from triplet import Triplet
 from sendmail import Mail
 
 json_key = 'credentialKey.json'
@@ -17,6 +19,7 @@ scope = ['https://spreadsheets.google.com/feeds']
 
 transfercsv = 'tempD.csv'
 savingcsv = 'tempsaving.csv'
+
 
 def monitoringSeq():
     subprocess.call(["sudo", "./measuring"])
@@ -82,13 +85,15 @@ def unifier(originname, offsetname, deleting=False,verbose=False):
         if verbose==True:
             print('UploadProcess::DataUnifier::Tranfer file deleted')
 
-def UploadSeq2(verbose=False): #delayed uploading (one by one dataline)
-    sheet = GetSpreadsheet(verbose=verbose)
+def UploadSeq2(outpipe=None , verbose=False): #delayed uploading (one by one dataline)
+    sheet = GetSpreadsheet(datapipe=None, verbose=verbose)
     #get data from temporary file
     imdata = [None]*5
     with open(savingcsv, 'rt', encoding='utf-8') as f:
         reader = csv.reader(f)
         totalD = list(reader)
+        if not outpipe is None:
+            outpipe.send(totalD)
     if verbose:
         print('UploadProcess::UploadSequence::Found %d lines saved, ' %(len(totalD)),end='')
     if not len(totalD)==0:
@@ -135,13 +140,13 @@ def monitoringProcess(verbose=False): #monitoring sequence for multiprocessing
         time.sleep(60)
 
 @timeout_decorator.timeout(40)
-def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) for multiprocessing
+def uploadingProcess(inpipe=None, verbose=False): #process of ((Uploading + Data Transfer)) for multiprocessing
     if verbose:
         print('UploadProcess::Start Uploading Sequence')
     try:
         if os.path.exists(transfercsv):
             unifier(savingcsv,transfercsv,deleting=True,verbose=verbose)
-        upstate = UploadSeq2(verbose=verbose)
+        upstate = UploadSeq2(outpipe=inpipe, verbose=verbose)
         if upstate:
             highdeleter(savingcsv)
             if verbose:
@@ -152,6 +157,26 @@ def uploadingProcess(verbose=False): #process of ((Uploading + Data Transfer)) f
         SetLastRow()
     except:
         raise
+                    
+def alarmProcess(outpipe, verbose=False):
+    while True:
+        checker = Limiter(thHi=25, thLo=23)
+        msg = outpipe.recv()
+        to = None
+        status = checker.alertcheck(float(msg[1]))
+        if a==Triplet.Up:
+            par = "temperature is too high. \n condition of atmosphere is %s *C, %s \% \n measure at %s  \n\n best regards\nCIMS" %(msg[1], msg[2], msg[0])
+        elif a==Triplet.Down:
+            par = "temperature is recovered. \n condition of atmosphere is %s *C, %s \% \n measure at %s  \n\n best regards\nCIMS" %(msg[1], msg[2], msg[0])
+        elif a==Triplet.Mid:
+            pass
+        else:
+            raise TypeError
+        if a==Triplet.Up or a==Triplet.Down:
+            mail = Mail(To=to, Sub="Mailling Alert for CIMS", From="sendmailtest@cims.kr", Par=par, verbose=True)
+            mail.writeMail()
+            mail.sendMail()
+
 
 def ClockProcess(verbose=False):
     time.sleep(10)
@@ -168,10 +193,14 @@ def main(verbose=False):
         mproc.start()
         tproc = Process(target=ClockProcess, args=(True,))
         tproc.start()
+        input_p, output_p = Pipe()
+        rproc = Process(target=alarmProcess, args=(output_p, True))
         SetLastRow(verbose=True)
+        #mailling process pipe setting
+        mailOutPipe, mailInPipe = Pipe()
         while True:
             try:
-                uploadingProcess(True)
+                uploadingProcess(input_p, True)
             except imeout_decorator.timeout_decorator.TimeoutError:
                 if verbose:
                     print('UploadProcess::Uploading Timeout. Kill and Reload.')
@@ -183,6 +212,9 @@ def main(verbose=False):
             print('MonitoringProcess::Terminated')
         uproc.join()
         tproc.join()
+        mailOutPipe.close()
+        mailInPipe.close()
+        rproc.join()
         if verbose:
             print('UploadProcess::Exit')
     except:

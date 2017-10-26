@@ -50,7 +50,7 @@ if __name__ == "__main__":
         testmailfrom = "sendmailtest@raspberry.pi"
     configInt = random.randint(0,100000)
     testmail = Mail(To=testmailto, Sub="Sendmail Software Test", From=testmailfrom)
-    testmail.Par = "Mail for test Sendmail software with Python script. \n if you didn\'t do test, just ignore. \n the configuration number is " + str(configInt) + " \n\n Best Regards. \n Sendmail Test Software." 
+    testmail.Par = "Mail for test Sendmail software with Python script. \nif you didn\'t do test, just ignore. \nthe configuration number is " + str(configInt) + " \n\n Best Regards. \n Sendmail Test Software." 
     testmail.writeMail()
     print("E-mail is written, will be sent.\nIf it went by too long (over 2 min.), Do KeyboardInterrupt (Ctrl+C) and check your sendmail software")
     print("Sending Sequence Start.")

@@ -32,6 +32,7 @@
 import sys, os
 import subprocess
 from multiprocessing import process
+import sendmail
 
 from triplet import Triplet
 
@@ -116,6 +117,12 @@ class Limiter:
     def datainput(self, data):
         self.alert = self.alertcheck(data)
 
+#def MailingProcess():
+#    mail = sendmail.Mail(To="minjae@hipex.phys.pusan.ac.kr", Sub="hello world!", From="sendmailtest@hipex.phys.pusan.ac.kr", Par="test1", verbose=True)
+#    mail.writeMail()
+#    mail.sendMail()
+
+
 if __name__ == "__main__":
     print("Data value flowing check on threshold with hysteresis")
     print("you can input value continously, with threshold")
@@ -126,6 +133,15 @@ if __name__ == "__main__":
             print("R-ALERT STATE: ", end='')
             print(a)
             a = checker.alertcheck(float(input('input loop: ')))
+            if a==Triplet.Up:
+                MailingProcess()
+                pass
+            elif a==Triplet.Down:
+                pass
+            elif a==Triplet.Mid:
+                pass
+            else:
+                raise TypeError
         except ValueError:
             print("\n unknown value")
         except KeyboardInterrupt:
